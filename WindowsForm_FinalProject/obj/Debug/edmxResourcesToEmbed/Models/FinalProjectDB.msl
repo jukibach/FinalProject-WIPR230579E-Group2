@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBProjectModelStoreContainer" CdmEntityContainer="DBProjectEntities">
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="DBProjectModel.Project">
+        <MappingFragment StoreEntitySet="Project">
+          <ScalarProperty Name="PName" ColumnName="PName" />
+          <ScalarProperty Name="PContent" ColumnName="PContent" />
+          <ScalarProperty Name="PType" ColumnName="PType" />
+          <ScalarProperty Name="PBegin" ColumnName="PBegin" />
+          <ScalarProperty Name="PEnd" ColumnName="PEnd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="DBProjectModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Class" ColumnName="Class" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="StudentProjects" TypeName="DBProjectModel.StudentProjects" StoreEntitySet="StudentProjects">
+      <EndProperty Name="Project">
+        <ScalarProperty Name="PName" ColumnName="Project_PName" />
+      </EndProperty>
+      <EndProperty Name="Student">
+        <ScalarProperty Name="ID" ColumnName="Student_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

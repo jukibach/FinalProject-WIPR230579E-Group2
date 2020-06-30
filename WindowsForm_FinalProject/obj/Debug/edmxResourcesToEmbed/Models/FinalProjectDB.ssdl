@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="PName" />
+    </Key>
+    <Property Name="PName" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PContent" Type="nvarchar(max)" />
+    <Property Name="PType" Type="nvarchar(max)" />
+    <Property Name="PBegin" Type="datetime" />
+    <Property Name="PEnd" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Fullname" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar(max)" />
+    <Property Name="Phone" Type="nvarchar(max)" />
+    <Property Name="Gender" Type="nvarchar(max)" />
+    <Property Name="Birthday" Type="datetime" Nullable="false" />
+    <Property Name="Class" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="StudentProjects">
+    <Key>
+      <PropertyRef Name="Student_ID" />
+      <PropertyRef Name="Project_PName" />
+    </Key>
+    <Property Name="Student_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Project_PName" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_StudentProjects_dbo_Project_Project_PName">
+    <End Role="Project" Type="Self.Project" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="StudentProjects" Type="Self.StudentProjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="PName" />
+      </Principal>
+      <Dependent Role="StudentProjects">
+        <PropertyRef Name="Project_PName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_StudentProjects_dbo_Student_Student_ID">
+    <End Role="Student" Type="Self.Student" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="StudentProjects" Type="Self.StudentProjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentProjects">
+        <PropertyRef Name="Student_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBProjectModelStoreContainer">
+    <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentProjects" EntityType="Self.StudentProjects" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_StudentProjects_dbo_Project_Project_PName" Association="Self.FK_dbo_StudentProjects_dbo_Project_Project_PName">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="StudentProjects" EntitySet="StudentProjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_StudentProjects_dbo_Student_Student_ID" Association="Self.FK_dbo_StudentProjects_dbo_Student_Student_ID">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="StudentProjects" EntitySet="StudentProjects" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
